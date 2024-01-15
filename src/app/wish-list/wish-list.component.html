@@ -9,7 +9,7 @@
   <ul class="wish-list">
     <app-wish-list-item
     *ngFor="let wish of wishes"
-    [wishText]="wish.wishText"
+    [wish]="wish"
     [(fullfilled)]="wish.isComplete"
     >
 
