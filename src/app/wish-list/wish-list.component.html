@@ -7,14 +7,20 @@
   </ng-template> -->
 <ng-template #showItems>
   <ul class="wish-list">
-    <li *ngFor="let item of wishes; index as ii">
+    <app-wish-list-item
+    *ngFor="let wish of wishes"
+    [wishText]="wish.wishText"
+    [(fullfilled)]="wish.isComplete"
+    >
+
+    </app-wish-list-item>
+    <li>
       <div class="form-check">
         <label class="form-check-label">
           <input
             type="checkbox"
             class="checkbox"
             [checked]="item.isComplete"
-            [attr.data-index]="ii"
             (click)="toggleItem(item)"
           />
           {{ item.wishText }}
