@@ -3,14 +3,21 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { WishItem } from '../shared/models/wishItem';
 import { FormsModule } from '@angular/forms';
+import { WishListComponent } from "./wish-list/wish-list.component";
+import { AddWishFormComponent } from "./add-wish-form/add-wish-form.component";
 
+const filters=[
+  (item:WishItem)=>item,
+  (item:WishItem)=>!item.isComplete,
+  (item:WishItem)=>item.isComplete
+]
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet,FormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    imports: [CommonModule, RouterOutlet, FormsModule, WishListComponent, AddWishFormComponent]
 })
 
 export class AppComponent {
@@ -20,21 +27,23 @@ export class AppComponent {
     new WishItem('Commit the code')
   ];
   newWishText='new wish';
+  
+  listfillter:any='0';
 
   title = 'wishlist';
-  clearFieald(){
-    this.newWishText='';
-  }
-  addNewWish(){
-    //todo:add wish to items array
-    //clear the text box
-    this.items.push(new WishItem(this.newWishText));
-    this.newWishText='new wish';
-    
 
+  get visibleItems():WishItem[]{
+    return this.items.filter(filters[this.listfillter]);
   }
-  toggleItem(item:WishItem){
-    item.isComplete = !item.isComplete;
-    console.log(item);
-  }
+
+ 
+  // filterChanged(value:any){
+  //   if(value=='0'){
+  //     this.visibleItems=this.items;
+  //   }else if(value=='1'){
+  //     this.visibleItems=this.items.filter(item=>!item.isComplete)
+  //   }else{
+  //     this.visibleItems=this.items.filter(item=>item.isComplete)
+  //   }
+  // }
 }
