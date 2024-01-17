@@ -1,5 +1,5 @@
 import { Component,EventEmitter,OnInit, Output,Input } from '@angular/core';
-import { WishItem } from '../../shared/models/wishItem';
+import { WishItem } from '../../../shared/models/wishItem';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { __values } from 'tslib';

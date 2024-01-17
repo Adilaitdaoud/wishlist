@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component,OnInit,Output,EventEmitter, Input } from '@angular/core';
-import {EventService} from './../../shared/services/EventService'
-import { WishItem } from '../../shared/models/wishItem';
+import {EventService} from '../../../shared/services/EventService'
+import { WishItem } from '../../../shared/models/wishItem';
 
 
 @Component({
