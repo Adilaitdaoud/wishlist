@@ -1,0 +1,6 @@
+[
+    {"wishText":"learn Angular","isComplete":false},
+    {"wishText":"Get Coffe","isComplete":true},
+    {"wishText":"Find grass","isComplete":true},
+    {"wishText":"get lot of mony in this year","isComplete":false}
+]

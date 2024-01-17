@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component,OnInit, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { WishItem } from '../shared/models/wishItem';
@@ -7,6 +7,8 @@ import { WishListComponent } from "./wish-list/wish-list.component";
 import { AddWishFormComponent } from "./add-wish-form/add-wish-form.component";
 import { WishFilterComponent } from "./wish-filter/wish-filter.component";
 import {EventService} from './../shared/services/EventService'
+import { WishService } from './wish.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
@@ -14,10 +16,15 @@ import {EventService} from './../shared/services/EventService'
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [CommonModule, RouterOutlet, FormsModule, WishListComponent, AddWishFormComponent, WishFilterComponent]
+    imports: [CommonModule, RouterOutlet, FormsModule, WishListComponent, AddWishFormComponent, WishFilterComponent,HttpClientModule]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
+  items:WishItem[]=[]||undefined;
+  newWishText='new wish';
+  filter:any=()=>{};
+  title = 'wishlist';
+  wishService=inject(WishService);
   constructor(events:EventService){
     events.listen('removeWish',(wish:any)=>{
       let index=this.items.indexOf(wish);
@@ -25,15 +32,13 @@ export class AppComponent {
       console.log('the wish is deleted '+wish);
     })
   }
-  items:WishItem[]=[
-    new  WishItem('To Learn Angular'),
-    new  WishItem('Get  Coffee',true),
-    new WishItem('Commit the code')
-  ];
-  newWishText='new wish';
-  filter:any=()=>{};
+
+
+  ngOnInit(): void {
+    this.wishService.getWishes().subscribe((data:any) =>{
+      this.items=data;
+      console.log(data)
+    });
+  }
   
-
-  title = 'wishlist';
-
 }
