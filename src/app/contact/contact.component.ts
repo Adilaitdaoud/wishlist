@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './contact.component.html',
-  styleUrl: './contact.component.css'
+  styleUrl: './contact.component.css',
 })
 export class ContactComponent implements OnInit {
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+  contactForm = new FormGroup({
+    SenderName : new FormControl(''),
+    SenderEmail : new FormControl(''),
+    SenderMessage : new FormControl(''),
+  });
 
-  SenderNameControl=new FormControl('');
-  SenderEmailControl=new FormControl('');
-  SenderMessageControl=new FormControl('');
-
-  submitForm(){
-    if(this.SenderNameControl.dirty){
-      alert('you changed the name field');
-    }
+  submitForm() {
+    console.log(this.contactForm.value)
+   
   }
 }
