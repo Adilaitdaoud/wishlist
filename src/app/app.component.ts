@@ -20,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 
 export class AppComponent implements OnInit{
-  items:WishItem[]=[]||undefined;
+  items:WishItem[]=[];
   newWishText='new wish';
   filter:any=()=>{};
   title = 'wishlist';
@@ -37,8 +37,13 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.wishService.getWishes().subscribe((data:any) =>{
       this.items=data;
-      console.log(data)
-    });
+      console.log('we get :'+data)
+      console.log('item table has :'+this.items)
+    },
+    (error:any)=>{
+      alert(error.message);
+    }
+    );
   }
   
 }
