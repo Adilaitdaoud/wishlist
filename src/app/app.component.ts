@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { WishListComponent } from "./wish-list/wish-list.component";
 import { AddWishFormComponent } from "./add-wish-form/add-wish-form.component";
 import { WishFilterComponent } from "./wish-filter/wish-filter.component";
-import events from './../shared/services/EventService'
+import {EventService} from './../shared/services/EventService'
 
 
 @Component({
@@ -18,7 +18,7 @@ import events from './../shared/services/EventService'
 })
 
 export class AppComponent {
-  constructor(){
+  constructor(events:EventService){
     events.listen('removeWish',(wish:any)=>{
       let index=this.items.indexOf(wish);
       this.items.splice(index,1);
