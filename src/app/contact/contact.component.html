@@ -10,6 +10,11 @@
   <div class="mb-3">
     <label class="form-label">Your Email Adress</label>
     <input type="email" class="form-control" formControlName="SenderEmail" />
+    <div *ngIf="contactForm.get('SenderEmail')?.invalid && (contactForm.get('SenderEmail')?.touched || contactForm.get('SenderEmail')?.dirty)">
+        <small class="text-danger">
+
+        </small>
+    </div>
   </div>
   <div class="mb-3">
     <label class="form-label">Message</label>
@@ -17,6 +22,6 @@
     </textarea>
   </div>
   <div class="mb-3">
-    <button class="btn btn-primary" type="submit">Send Message</button>
+    <button class="btn btn-primary" type="submit" [disabled]="contactForm.invalid">Send Message</button>
   </div>
 </form>
