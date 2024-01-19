@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
-import { invalidEmailDomain } from './ivalidEmailDomaine';
+import { createInvalidDomainValidator } from './ivalidEmailDomaine';
 
+const invalidEmailDomain =createInvalidDomainValidator(['gmail.com','yahoo.com' ]);
 @Component({
   selector: 'app-contact',
   standalone: true,
