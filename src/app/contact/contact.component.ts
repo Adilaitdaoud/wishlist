@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
+import { invalidEmailDomain } from './ivalidEmailDomaine';
 
 @Component({
   selector: 'app-contact',
@@ -13,7 +14,7 @@ export class ContactComponent implements OnInit {
   ngOnInit(): void {}
   contactForm = new FormGroup({
     SenderName : new FormControl('',Validators.required),
-    SenderEmail : new FormControl('',[Validators.required,Validators.email]),
+    SenderEmail : new FormControl('',[Validators.required,Validators.email,invalidEmailDomain]),
     SenderMessage : new FormControl('',[Validators.required,Validators.minLength(10)]),
   });
 
