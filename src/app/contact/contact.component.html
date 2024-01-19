@@ -6,13 +6,22 @@
   <div class="mb-3">
     <label class="form-label">Your Name</label>
     <input type="text" class="form-control" formControlName="SenderName" />
+    <div *ngIf="contactForm.get('SenderName')?.invalid&&contactForm.get('SenderName')?.dirty">
+      <small class="text-danger" *ngIf="contactForm.get('SenderMessage')?.hasError('required')">
+        this field is required
+    </small>
+     
+    </div>
   </div>
   <div class="mb-3">
     <label class="form-label">Your Email Adress</label>
     <input type="email" class="form-control" formControlName="SenderEmail" />
     <div *ngIf="contactForm.get('SenderEmail')?.invalid && (contactForm.get('SenderEmail')?.touched || contactForm.get('SenderEmail')?.dirty)">
-        <small class="text-danger">
-
+        <small class="text-danger" *ngIf="contactForm.get('SenderEmail')?.hasError('required')">
+            This field is required
+        </small>
+        <small class="text-danger" *ngIf="contactForm.get('SenderEmail')?.hasError('email')">
+          Please enter your email adress
         </small>
     </div>
   </div>
@@ -20,6 +29,14 @@
     <label class="form-label">Message</label>
     <textarea rows="3" class="form-control" formControlName="SenderMessage">
     </textarea>
+    <div *ngIf="contactForm.get('SenderMessage')?.invalid&&contactForm.get('SenderMessage')?.dirty">
+      <small class="text-danger" *ngIf="contactForm.get('SenderMessage')?.hasError('required')">
+        this field is required
+    </small>
+      <small class="text-danger"  *ngIf="contactForm.get('SenderMessage')?.hasError('minlength')">
+        the message should be more then 10 charachter
+    </small>
+    </div>
   </div>
   <div class="mb-3">
     <button class="btn btn-primary" type="submit" [disabled]="contactForm.invalid">Send Message</button>
